@@ -15,7 +15,9 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'rebrickable',
+    'myRebrickApp.controllers'
   ])
   .config(function ($routeProvider) {
     $routeProvider

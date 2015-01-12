@@ -1,0 +1,6 @@
+<div data-ng-model="user"  data-ng-show="!user.hash" data-ng-controller="UserLoginCtrl">
+    <label for="email">email</label><input type="text" id="email" placeholder="Email" data-ng-model="user.email"/>
+    <label for="password">password</label><input type="password" id="password" placeholder="Password" data-ng-model="user.password"/>
+    <button type="submit" class="btn btn-default" data-ng-click="login()">Submit</button>
+    <div>{{user.email}}</div>
+</div>

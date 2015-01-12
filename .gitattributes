@@ -1,1 +1,4 @@
 * text=auto
+
+# set default line endings
+* text eol=lf
