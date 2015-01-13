@@ -13,7 +13,8 @@
         errorMap : {
             SERVICE_CALL_ERROR : 'Service communication error',
             INVALIDKEY : 'The API Key is invalid',
-            INVALIDUSERPASS : 'Invalid user email or password'
+            INVALIDUSERPASS : 'Invalid user email or password',
+            INVALIDHASH : 'The hash key does not match a user/password'
         }
     });
 }(angular));

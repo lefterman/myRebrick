@@ -1,24 +1,19 @@
 (function(services){
     'use strict';
-    services.service('UserHashSrvc', ['$q', '$http', 'serviceConfig', function($q, $http, serviceConfig) {
+    services.service('UserHashSrvc', ['$q', '$http', 'serviceConfig', 'ApiUtil', function($q, $http, serviceConfig, apiUtil) {
         var apiId = serviceConfig.apiIdMap.GET_USER_HASH,
             apiUrl = serviceConfig.apiUrl + apiId,
             apiKey = serviceConfig.apiKey,
             errorMap = serviceConfig.errorMap;
-        // INVALIDKEY - The API Key is invalid
-        // INVALIDUSERPASS - Invalid user email or password
-        function getErrorMsg (errorId) {
-            return serviceConfig.errorMap[errorId] !== undefined ? serviceConfig.errorMap[errorId]  : ''; 
-        }
         
         function transformResponse (defaults) {
             defaults = angular.isArray(defaults) ? defaults : [defaults];
-            defaults.unshift(function(response) { 
+            defaults.unshift(function(response) {
                 var data = {};
                 if (response && response.length === 32) {
                     data.hash = response;
                 } else {
-                    data.error = response;        
+                    data.error = response;
                 } 
                 return data; 
             });
@@ -40,7 +35,7 @@
                 if (data.hash) {
                     deferred.resolve(data);
                 } else {
-                    error = getErrorMsg(data.error) || errorMap.SERVICE_CALL_ERROR;
+                    error = apiUtil.getErrorMsg(data.error) || errorMap.SERVICE_CALL_ERROR;
                     deferred.reject(error);
                 }
             }).error(function() {
@@ -49,4 +44,4 @@
             return deferred.promise;
         };
     }]);
-}(angular.module('myRebrickApp')));
+}(angular.module('rebrickable.services')));
