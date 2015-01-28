@@ -1,13 +1,13 @@
 /**
  * @ngdoc service
- * @name rebrickable.services.service:ApiUtil
+ * @name rebrickable.services.service:ApiUtilSrvc
  *
  * @description
  * Gives common utility functions for the components of the rebrickable module
  */
 (function(services){
     'use strict';
-    services.service('ApiUtil', ['serviceConfig', function(serviceConfig){
+    services.service('ApiUtilSrvc', ['serviceConfig', function(serviceConfig){
         var errorMap = serviceConfig.errorMap;
         if (typeof errorMap !== 'object') {
             throw 'Missing config parameter exception in ApiUtil.js: errorMap';

@@ -1,11 +1,24 @@
+/**
+ * @ngdoc service
+ * @name rebrickable.services.service:UserHashSrvc
+ *
+ * @description
+ * Implements the rebrickable UserHash API call
+ * 
+ */
 (function(services){
     'use strict';
-    services.service('UserHashSrvc', ['$q', '$http', 'serviceConfig', 'ApiUtil', function($q, $http, serviceConfig, apiUtil) {
+    services.service('UserHashSrvc', ['$q', '$http', 'serviceConfig', 'ApiUtilSrvc', function($q, $http, serviceConfig, apiUtilSrvc) {
         var apiId = serviceConfig.apiIdMap.GET_USER_HASH,
             apiUrl = serviceConfig.apiUrl + apiId,
             apiKey = serviceConfig.apiKey,
             errorMap = serviceConfig.errorMap;
-        
+        /**
+         * Transformer function for API responses
+         * @param   {Array}  defaults The array of default transformer functions
+         * @returns {Object} The response object containing the hash attribute 
+         * or an error attribute when an error occures
+         */
         function transformResponse (defaults) {
             defaults = angular.isArray(defaults) ? defaults : [defaults];
             defaults.unshift(function(response) {
@@ -35,7 +48,7 @@
                 if (data.hash) {
                     deferred.resolve(data);
                 } else {
-                    error = apiUtil.getErrorMsg(data.error) || errorMap.SERVICE_CALL_ERROR;
+                    error = apiUtilSrvc.getErrorMsg(data.error) || errorMap.SERVICE_CALL_ERROR;
                     deferred.reject(error);
                 }
             }).error(function() {
